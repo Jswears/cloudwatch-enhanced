@@ -1,0 +1,56 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+*.egg-info/
+*.egg
+*.env
+.env.*
+venv/
+env/
+build/
+dist/
+pip-wheel-metadata/
+
+# --- Lambda Build Files ---
+package/
+lambda_function.zip
+
+# --- Terraform ---
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# --- AWS Files ---
+*.pem
+.aws/
+
+# --- Logs and Temp Files ---
+*.log
+*.tmp
+
+# --- VSCode ---
+.vscode/
+*.code-workspace
+
+# --- System Files ---
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# --- IDE Specific (Optional) ---
+.idea/
+*.iml
+
+# --- Python Testing Files (Optional) ---
+.tox/
+.pytest_cache/
+.coverage
+htmlcov/
+nosetests.xml
+coverage.xml
+*.cover
