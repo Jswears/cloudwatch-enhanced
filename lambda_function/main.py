@@ -1,4 +1,4 @@
-from utils import get_weather_data
+from utils import get_weather_data, push_cloudwatch_metrics
 
 # Lambda function handler
 def lambda_handler(event, context):
@@ -11,6 +11,8 @@ def lambda_handler(event, context):
         humidity_percent = weather_data['humidity_percent']
         description = weather_data['description']
         elapsed_time = weather_data['elapsed_time']
+        
+        push_cloudwatch_metrics(city, temperature, humidity_percent, elapsed_time)
         
         return {
             'statusCode': 200,
