@@ -8,6 +8,7 @@ This project collects weather data for a specified city using the OpenWeatherMap
   - [Table of Contents](#table-of-contents)
   - [Prerequisites](#prerequisites)
   - [Architecture Diagram](#architecture-diagram)
+  - [Demo Video](#demo-video)
   - [Features](#features)
   - [Project Structure](#project-structure)
   - [Setup](#setup)
@@ -27,6 +28,13 @@ This project collects weather data for a specified city using the OpenWeatherMap
 ## Architecture Diagram
 
 ![Architecture Diagram](/architecture-diagram.png)
+
+## 📹 Demo Video
+
+👉 [Watch the demo on YouTube](https://youtu.be/gk5vjf95TJ8?si=cYH2dNRRPUp5K0ft)
+
+[![Watch the demo](https://img.youtube.com/vi/gk5vjf95TJ8/0.jpg)](https://youtu.be/gk5vjf95TJ8?si=cYH2dNRRPUp5K0ft)
+
 
 ## Features
 
