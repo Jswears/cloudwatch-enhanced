@@ -1,7 +1,5 @@
 from utils import get_weather_data, push_cloudwatch_metrics
 
-# Lambda function handler
-
 
 def lambda_handler(event, context):
     city_name = event.get('city', 'Hamburg')

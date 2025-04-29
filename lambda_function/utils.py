@@ -1,10 +1,10 @@
 import os
 import requests
 import boto3
-
 # You may use dotenv if necessary for local development
 # from dotenv import load_dotenv
 # load_dotenv()
+
 
 def get_weather_data(city):
     api_key = os.getenv('WEATHER_API_KEY')
@@ -17,7 +17,7 @@ def get_weather_data(city):
     response = requests.get(base_url, params=params)
     if response.status_code == 200:
         data = response.json()
-        
+
         weather = {
             'city': data['name'],
             'temperature': data['main']['temp'],
@@ -28,11 +28,13 @@ def get_weather_data(city):
         return weather
     else:
         return None
-    
+
 # Function to push metrics to CloudWatch
+
+
 def push_cloudwatch_metrics(city, temperature_celsius, humidity_percent, elapsed_time):
     cloudwatch = boto3.client('cloudwatch')
-    
+
     # Push custom metrics to CloudWatch
     cloudwatch.put_metric_data(
         Namespace='WeatherMetrics',
@@ -67,4 +69,5 @@ def push_cloudwatch_metrics(city, temperature_celsius, humidity_percent, elapsed
             }
         ]
     )
-    print(f"Metrics pushed to CloudWatch for {city}: Temperature={temperature_celsius}, Humidity={humidity_percent}, ElapsedTime={elapsed_time}ms")    
+    print(
+        f"Metrics pushed to CloudWatch for {city}: Temperature={temperature_celsius}, Humidity={humidity_percent}, ElapsedTime={elapsed_time}ms")
