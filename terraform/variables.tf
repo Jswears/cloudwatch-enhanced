@@ -1,19 +1,19 @@
 variable "lambda_function_name" {
   description = "The name of the Lambda function"
   type        = string
-  default = "cloudwatch-enhanced-function"
+  default     = "cloudwatch-enhanced-function"
 }
 
 variable "lambda_handler" {
   description = "The handler for the Lambda function"
   type        = string
-  default = "main.lambda_handler"
+  default     = "main.lambda_handler"
 }
 
 variable "lambda_runtime" {
   description = "The runtime for the Lambda function"
   type        = string
-  default = "python3.13"
+  default     = "python3.13"
 }
 
 variable "lambda_memory_size" {
