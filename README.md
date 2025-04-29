@@ -43,20 +43,34 @@ This project collects weather data for a specified city using the OpenWeatherMap
 - `lambda_function/` - Lambda source code and requirements
 - `terraform/` - Terraform scripts for AWS resources
 
+## Storing Secrets Securely
+
+This project uses AWS Systems Manager (SSM) Parameter Store to securely provide the OpenWeatherMap API key to the Lambda function. Before deploying with Terraform, store your API key as a SecureString parameter:
+
+```sh
+aws ssm put-parameter \
+  --name "/cloudwatch-enhanced/weather_api_key" \
+  --value "your_api_key_here" \
+  --type "SecureString"
+```
+
+- Replace `your_api_key_here` with your actual OpenWeatherMap API key.
+- Make sure your AWS CLI is configured with sufficient permissions to write to SSM Parameter Store.
+
+Terraform will automatically inject this value as the `WEATHER_API_KEY` environment variable for the Lambda function.
+
 ## Setup
 
 1. **Clone the repository**
-2. **Set up environment variables**
-
-   - Create a `.env` file with your OpenWeatherMap API key if want to test locally:
+2. **Store your OpenWeatherMap API key in AWS SSM Parameter Store** (see [Storing Secrets Securely](#storing-secrets-securely))
+3. **(Optional) Set up a `.env` file for local testing**
    - Remove line 4 from `lambda_function/utils.py`
    - Uncomment line 5-6 from `lambda_function/utils.py`
-
-   ```
-   WEATHER_API_KEY=your_api_key_here
-   ```
-
-3. **Install dependencies**
+   - Add your API key to `.env`:
+     ```
+     WEATHER_API_KEY=your_api_key_here
+     ```
+4. **Install dependencies**
    - For Lambda: see `lambda_function/requirements.txt`
    - For local testing: create a virtual environment and install dependencies:
      ```sh
@@ -64,22 +78,19 @@ This project collects weather data for a specified city using the OpenWeatherMap
      source venv/bin/activate
      pip install -r lambda_function/requirements.txt
      ```
-4. **Deploy Lambda Function**
-
-   - Package and upload the Lambda function code as and the modules in `lambda_function.zip`
-   - Create a zip file of the Lambda function code:
+5. **Deploy Lambda Function**
+   - Package and upload the Lambda function code and modules in `lambda_function.zip`:
      ```sh
-       mkdir package
-       cd package
-       pip install -r ../lambda_function/requirements.txt -t .
-       cp ../lambda_function/*.py .
-       zip -r ../lambda_function.zip .
-       cd ..
-       rm -rf package
+     mkdir package
+     cd package
+     pip install -r ../lambda_function/requirements.txt -t .
+     cp ../lambda_function/*.py .
+     zip -r ../lambda_function.zip .
+     cd ..
+     rm -rf package
      ```
-   - The lambda function will be deployed using Terraform, so you don't need to upload the zip file manually.
-
-5. **Deploy Infrastructure**
+   - The Lambda function will be deployed using Terraform, so you don't need to upload the zip file manually.
+6. **Deploy Infrastructure**
    - Initialize and apply Terraform in the `terraform/` directory:
      ```sh
      terraform init
@@ -88,7 +99,7 @@ This project collects weather data for a specified city using the OpenWeatherMap
    - (Optional) You can use `terraform fmt` to format the Terraform files.
    - (Optional) You can use `terraform validate` to validate the Terraform files.
    - (Optional) You can use `terraform plan` to see the changes that will be applied.
-     -You can use `terraform destroy` to remove all resources created by Terraform.
+   - You can use `terraform destroy` to remove all resources created by Terraform.
 
 ## Usage
 

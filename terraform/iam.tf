@@ -26,9 +26,17 @@ resource "aws_iam_role_policy" "lambda_policy" {
           "logs:CreateLogGroup",
           "logs:CreateLogStream",
           "logs:PutLogEvents",
+          "logs:DescribeLogStreams",
           "cloudwatch:PutMetricData"
         ],
         Resource = "*"
+      },
+      {
+        Effect = "Allow",
+        Action = [
+          "ssm:GetParameter"
+        ],
+        Resource = "arn:aws:ssm:${var.aws_region}:*:*parameter/cloudwatch-enhanced/weather_api_key"
       }
     ]
   })
