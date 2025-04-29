@@ -46,3 +46,8 @@ variable "temperature_threshold" {
   type        = number
   default     = 10
 }
+variable "aws_region" {
+  description = "The AWS region to deploy the Lambda function"
+  type        = string
+  default     = "eu-central-1"
+}
