@@ -1,10 +1,12 @@
-from dotenv import load_dotenv
 import os
 import requests
 import boto3
 
+# You may use dotenv if necessary for local development
+# from dotenv import load_dotenv
+# load_dotenv()
+
 def get_weather_data(city):
-    load_dotenv()
     api_key = os.getenv('WEATHER_API_KEY')
     base_url = "http://api.openweathermap.org/data/2.5/weather"
     params = {
@@ -65,4 +67,4 @@ def push_cloudwatch_metrics(city, temperature_celsius, humidity_percent, elapsed
             }
         ]
     )
-    print(f"Metrics pushed to CloudWatch for {city}: Temperature={temperature_celsius}, Humidity={humidity_percent}")    
+    print(f"Metrics pushed to CloudWatch for {city}: Temperature={temperature_celsius}, Humidity={humidity_percent}, ElapsedTime={elapsed_time}ms")    
