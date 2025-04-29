@@ -26,3 +26,23 @@ variable "lambda_timeout" {
   type        = number
   default     = 30
 }
+variable "email_address" {
+  description = "The email address to receive alerts"
+  type        = string
+  default     = "ji.swearssalinas@gmail.com"
+}
+variable "environment" {
+  description = "The environment for the Lambda function"
+  type        = string
+  default     = "dev"
+}
+variable "project_name" {
+  description = "The name of the project"
+  type        = string
+  default     = "weather-alerts"
+}
+variable "temperature_threshold" {
+  description = "The temperature threshold for the alarm"
+  type        = number
+  default     = 10
+}
