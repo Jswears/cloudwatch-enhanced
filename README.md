@@ -26,7 +26,7 @@ This project collects weather data for a specified city using the OpenWeatherMap
 
 ## Architecture Diagram
 
-![Architecture Diagram](/architecture_diagram.png)
+![Architecture Diagram](/architecture-diagram.png)
 
 ## Features
 
